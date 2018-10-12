@@ -1,42 +1,41 @@
 provides "gpu"
 
-gpu_output = `lspci | grep 3D`
+gpu_output = `lscpi | grep 3D`
 #gpu_output = "05:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)\n06:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)\n"
 #gpu_output = "03:00.0 3D controller: NVIDIA Corporation Device 17fd (rev a1)"
 
-if gpu_output != ''
-  gpu_lines = gpu_output.split("\n")
-  gpu_count = 0
-  gpu_vendor = 'Unknown'
-  gpu_model = 'Unknown'
+if gpu_output['NVIDIA']
+  nvidia_output = `nvidia-smi -L`
+  gpu_info_str = nvidia_output.split("\n")[-1].split()
+  gpu_model = gpu_info_str[3]
+  gpu_count = gpu_info_str[1].sub ':', ''
+  gpu_count = gpu_count.to_i + 1
 
-  gpu_lines.each { |line|
-    begin
-      gpu_model_info = line[/\[.*\]/]
-      gpu_model_info['['] = ''
-      gpu_model_info[']'] = ''
+  if gpu_model.include? 'P100'
+    gpu_model = 'P100'
+  end
 
-      gpu_model = gpu_model_info.split(' ')[-1]
-    rescue
-      if not line['17fd'].nil?
-        gpu_model = 'M40'
-      end
-    end
-
-    if line['NVIDIA']
-      gpu_vendor = 'NVIDIA'
-    elsif line['AMD']
-      gpu_vendor = 'AMD'
-    end
-
-    if gpu_model
-      gpu_count += 1
-    end
-  }
   gpu_info = {
       :gpu => true,
       :gpu_model => gpu_model,
-      :gpu_vendor => gpu_vendor,
+      :gpu_vendor => 'NVIDIA',
+      :gpu_count => gpu_count
+  }
+elsif gpu_output['AMD']
+  gpu_lines = gpu_output.split('\n')
+  gpu_count = gpu_lines.length
+
+  begin
+    gpu_model_info = gpu_lines[-1][/\[.*\]/].tr('[]', '')
+    gpu_model = gpu_model_info[1]
+  rescue
+    gpu_model = 'Unknown'
+  end
+
+  gpu_info = {
+      :gpu => true,
+      :gpu_model => gpu_model,
+      :gpu_vendor => 'AMD',
       :gpu_count => gpu_count
   }
 else
