@@ -43,7 +43,12 @@ module Grid5000
     end
 
     def get_openstack_vendor_data
-      openstack_vendor_data = JSON.parse RestClient.get("http://169.254.169.254/openstack/latest/vendor_data.json", :accept => :json)
+      openstack_vendor_data = JSON.parse RestClient.get("http://169.254.169.254/openstack/latest/vendor_data2.json", :accept => :json)
+      if openstack_vendor_data.key?("chameleon")
+          openstack_vendor_data = openstack_vendor_data['chameleon']
+      else
+          openstack_vendor_data = JSON.parse RestClient.get("http://169.254.169.254/openstack/latest/vendor_data.json", :accept => :json)
+      end
       @node_uid = openstack_vendor_data["node"]
       @cluster_uid = openstack_vendor_data["cluster"]
       @site_uid = openstack_vendor_data["site"]
