@@ -2,6 +2,9 @@
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
+#TESTING
+require 'pry'
+#binding.pry
 require 'optparse'
 require 'optparse/time'
 
@@ -38,7 +41,7 @@ optparse = OptionParser.new(USAGE) do |opts|
   end
 
   $hashconf["mode"] = "oar_checks"
-  opts.on( '-m', '--mode MODE', "Specify the functional mode (oar_checks, api, jenkins) [default: 'oar_checks']") do |mode|
+  opts.on( '-m', '--mode MODE', "Specify the functional mode (oar_checks, api, jenkins, no_api) [default: 'oar_checks']") do |mode|
     $hashconf["mode"] = mode
   end
 
@@ -78,7 +81,6 @@ rescue OptionParser::InvalidOption => e
 end
 
 $hashconf = G5kChecks::ConfigParser.new($hashconf["conffile"]).parse.merge!($hashconf)
-
 G5kChecks::G5kChecks.new.run($hashconf)
 
 #Send fails to Syslog

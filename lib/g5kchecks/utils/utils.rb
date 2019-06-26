@@ -2,7 +2,6 @@
 # provide some useful functions
 require 'popen4'
 require 'g5kchecks/utils/dmidecode'
-
 class String
   def force_encoding(enc)
     self
