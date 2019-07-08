@@ -24,7 +24,6 @@ module G5kChecks
     end
 
     def run(conf)
-      #binding.pry
       rspec_opts = []
 
       if conf["enabletestlist"] and conf["enabletestlist"][0] != "all"
@@ -61,7 +60,6 @@ module G5kChecks
           c.add_formatter(RSpec::Core::Formatters::SyslogFormatter)
         end
       elsif conf["mode"] == "api"
-        binding.pry
         require 'g5kchecks/rspec/core/formatters/api_formatter'
         RSpec.configure do |c|
           c.add_formatter(RSpec::Core::Formatters::APIFormatter)
@@ -70,12 +68,6 @@ module G5kChecks
         require 'g5kchecks/rspec/core/formatters/jenkins_formatter'
         RSpec.configure do |c|
           c.add_formatter(RSpec::Core::Formatters::JenkinsFormatter)
-        end
-      elsif conf["mode"] == "no_api"
-        binding.pry
-        require 'g5kchecks/rspec/core/formatter/no_api_formatter'
-        RSpec.configure do |c|
-          c.add_formatter(RSpec::Core::Formatters::NoApiFormatter)
         end
       end
 
