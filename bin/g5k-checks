@@ -2,9 +2,6 @@
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
-#TESTING
-require 'pry'
-#binding.pry
 require 'optparse'
 require 'optparse/time'
 

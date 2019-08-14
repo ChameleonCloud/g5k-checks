@@ -7,7 +7,6 @@ require 'yaml'
 require 'ohai'
 Ohai::Config[:plugin_path] << File.expand_path(File.join(File.dirname(__FILE__), '/../ohai'))
 # Backported from Ohai 6 to support direct access to attributes without using the data dictionary
-#binding.pry
 
 module Ohai
   class System
