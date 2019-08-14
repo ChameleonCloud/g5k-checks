@@ -19,7 +19,9 @@ module Grid5000
       @ohai_description = nil
       @api_description = nil
       @max_retries = 2
-      get_openstack_vendor_data
+      unless @conf["noapi"]
+        get_openstack_vendor_data
+      end
     end
 
     def get_openstack_vendor_data
