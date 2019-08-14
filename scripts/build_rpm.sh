@@ -5,10 +5,8 @@ set -eu
 ############################################################
 # Installing dependencies
 ############################################################
-if [ -z ${RAMDISK+x} ]
-then
-    sudo yum install -y rubygems-devel
-fi
+sudo yum install -y rubygems-devel
+
 
 ############################################################
 # Preparing tmp folder and its subfolders
