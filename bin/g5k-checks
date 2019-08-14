@@ -54,6 +54,10 @@ optparse = OptionParser.new(USAGE) do |opts|
     $hashconf["urlapi"] = u
   end
 
+  opts.on("-n", "--no-api", "Run without calling the Openstack API (Used for ChameleonCloud Checks)") do |n|
+      $hashconf["noapi"] = true
+  end
+
   $hashconf["verbose"] = false
   opts.on_tail( '-v', '--verbose', "Enable verbose mode [default: #{$hashconf["verbose"]}]") do 
     $hashconf["verbose"] = true
@@ -78,7 +82,6 @@ rescue OptionParser::InvalidOption => e
 end
 
 $hashconf = G5kChecks::ConfigParser.new($hashconf["conffile"]).parse.merge!($hashconf)
-
 G5kChecks::G5kChecks.new.run($hashconf)
 
 #Send fails to Syslog

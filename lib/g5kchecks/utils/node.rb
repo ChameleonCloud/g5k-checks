@@ -6,8 +6,8 @@ require 'json'
 require 'yaml'
 require 'ohai'
 Ohai::Config[:plugin_path] << File.expand_path(File.join(File.dirname(__FILE__), '/../ohai'))
-
 # Backported from Ohai 6 to support direct access to attributes without using the data dictionary
+
 module Ohai
   class System
     def get_attribute(name)
@@ -39,7 +39,10 @@ module Grid5000
       @ohai_description = nil
       @api_description = nil
       @max_retries = 2
-      get_openstack_vendor_data
+      unless @conf["noapi"]
+        get_openstack_vendor_data
+      end
+      print
     end
 
     def get_openstack_vendor_data

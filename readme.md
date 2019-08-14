@@ -1,3 +1,13 @@
+# CC-Checks (Chameleon Cloud alterations to G5K checks)
+
+This fork includes changes made to Grid5000's for ChameleonCloud images:
+* Branches for Ubuntu usage
+  * Bionic
+  * Trusty
+  * Xenial
+* Added the -n flag to run checks without Openstack API call
+  * Used to run checks at deploy time of an instance
+
 ## Build RPM package
 
   $ ./scripts/build_rpm.sh

@@ -6,7 +6,6 @@ begin
 rescue LoadError
   # not installed
 end
-
 require 'g5kchecks/utils/node'
 require 'g5kchecks/utils/utils'
 
