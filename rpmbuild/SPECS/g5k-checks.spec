@@ -9,7 +9,6 @@ Group: Development/Languages
 License: CECILL-B
 URL: https://github.com/grid5000/g5k-checks
 Source0: %{gem_name}-%{version}.gem
-Requires: bridge-utils
 Requires: dmidecode
 Requires: ethtool
 Requires: fio
@@ -19,14 +18,7 @@ Requires: lshw
 Requires: ruby(release)
 Requires: ruby(rubygems)
 Requires: rubygem(json)
-Requires: rubygem(ohai) < 7
-Requires: rubygem(ohai) => 6
-Requires: rubygem(popen4)
-Requires: rubygem(rest-client)
-Requires: rubygem(rspec) < 3
-Requires: rubygem(rspec) => 2
 Requires: util-linux
-Requires: x86info
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
