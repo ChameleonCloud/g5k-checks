@@ -1,5 +1,9 @@
 # CC-Checks (Chameleon Cloud alterations to G5K checks)
 
+> **Note**: there are different branches in use!
+> `centos8`: targets the CentOS8 flavor of the CC-CentOS image build
+> `master`: targets everything else.
+
 This fork includes changes made to Grid5000's for ChameleonCloud images:
 * Branches for Ubuntu usage
   * Bionic
