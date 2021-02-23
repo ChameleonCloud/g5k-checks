@@ -5,6 +5,8 @@ require 'restclient'
 require 'json'
 require 'yaml'
 require 'ohai'
+# solve undefined method `<<' for nil:NilClass (NoMethodError)
+Ohai::Config[:plugin_path] = []
 Ohai::Config[:plugin_path] << File.expand_path(File.join(File.dirname(__FILE__), '/../ohai'))
 
 module Grid5000
