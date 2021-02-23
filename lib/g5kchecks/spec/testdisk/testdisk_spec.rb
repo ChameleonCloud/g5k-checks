@@ -23,7 +23,7 @@ describe "TestDisk" do
           maxt_read_api = @api[k]["timeread"].to_i if (@api and @api[k] and @api[k]["timeread"])
           err = (maxt_read-maxt_read_api).abs
           expected =  maxt_read_api/10
-          err.should be < expected, "#{maxt_read}, #{maxt_read_api}, block_devices, #{k}, timeread"
+          expect(err).to be < expected, "#{maxt_read}, #{maxt_read_api}, block_devices, #{k}, timeread"
         end
       end
     end
@@ -37,7 +37,7 @@ describe "TestDisk" do
           maxt_write_api = @api[k]["timewrite"].to_i if (@api and @api[k] and @api[k]["timewrite"])
           err = (maxt_write-maxt_write_api).abs
           expected = maxt_write_api/10
-          err.should be < expected, "#{maxt_write}, #{maxt_write_api}, block_devices, #{k}, timewrite"
+          expect(err).to be < expected, "#{maxt_write}, #{maxt_write_api}, block_devices, #{k}, timewrite"
         end
       end
     end

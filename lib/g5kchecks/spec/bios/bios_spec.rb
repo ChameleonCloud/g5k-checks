@@ -9,7 +9,7 @@ describe "Bios" do
     vendor_api = ""
     vendor_api = @api['vendor'] if @api
     vendor_ohai = @system['vendor']
-    vendor_ohai.should eql(vendor_api), "#{vendor_ohai}, #{vendor_api}, bios, vendor"
+    expect(vendor_ohai).to eql(vendor_api), "#{vendor_ohai}, #{vendor_api}, bios, vendor"
   end
 
   it "should have the correct version" do
@@ -18,14 +18,14 @@ describe "Bios" do
     version_ohai = @system['version'].gsub(/'/,'').strip
     version_ohai = version_ohai.to_f if version_ohai.to_f != 0.0
     version_api = version_api.to_f if version_api.to_f != 0.0
-    version_ohai.should eql(version_api), "#{version_ohai}, #{version_api}, bios, version"
+    expect(version_ohai).to eql(version_api), "#{version_ohai}, #{version_api}, bios, version"
   end
 
   it "should have the correct release date" do
     release_api = ""
     release_api = @api['release_date'] if @api
     release_ohai = @system['release_date']
-    release_ohai.should eql(release_api), "#{release_ohai}, #{release_api}, bios, release_date"
+    expect(release_ohai).to eql(release_api), "#{release_ohai}, #{release_api}, bios, release_date"
   end
 
 end

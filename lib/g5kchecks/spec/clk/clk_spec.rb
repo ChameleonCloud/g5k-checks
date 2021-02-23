@@ -5,7 +5,7 @@ describe "Clock" do
     hwdate = %x{date -d "`/sbin/hwclock --utc`" +"%s"}
     osdate = %x{date -u +"%s"}
     if (hwdate.to_i - osdate.to_i).abs > 1
-      system( "/sbin/hwclock --systohc" ).should eql(true), "clk error"
+      expect(system( "/sbin/hwclock --systohc" )).to eql(true), "clk error"
     end
   end
 
